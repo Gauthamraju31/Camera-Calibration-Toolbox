@@ -33,8 +33,7 @@ HEADERS += \
 
 FORMS += \
         forms/cameracalibrator.ui \
-        forms/test_window.ui \
-    forms/selectsinglecamera.ui
+        forms/test_window.ui
 
 INCLUDEPATH += src/ inc/
 

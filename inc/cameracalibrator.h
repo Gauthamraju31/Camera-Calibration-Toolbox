@@ -5,6 +5,16 @@
 #include <iostream>
 #include <QSignalMapper>
 
+enum WindowID
+{
+    MainWindow = 0,
+    SingleCameraWindow = 1,
+    StereoCameraWindow = 2,
+    ErrorcheckWindow = 3,
+    SingleCameraCalibratorWindow = 4,
+    StereoCameraCalibratorWindow = 5
+};
+
 namespace Ui {
 class CameraCalibrator;
 }

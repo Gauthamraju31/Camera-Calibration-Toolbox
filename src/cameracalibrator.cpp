@@ -2,23 +2,6 @@
 #include "ui_cameracalibrator.h"
 #include "ui_selectsinglecamera.h"
 
-//#define MainWindow 0
-//#define SelectSingleCameraWindow 1
-//#define SelectStereoCameraWindow 2
-//#define ErrorCheckWindow 3
-//#define SingleCameraCalibratorWindow 4
-//#define StereoCamera CalibratorWindow 5
-
-enum WindowIDS
-{
-    MainWindow = 0,
-    SingleCameraWindow = 1,
-    StereoCameraWindow = 2,
-    ErrorcheckWindow = 3,
-    SingleCameraCalibratorWindow = 4,
-    StereoCameraCalibratorWindow = 5
-};
-
 CameraCalibrator::CameraCalibrator(QWidget *parent) :
     QWidget(parent), m_buttonID(-1), m_windowID(MainWindow),
     ui(new Ui::CameraCalibrator)
@@ -33,6 +16,7 @@ CameraCalibrator::CameraCalibrator(QWidget *parent) :
     connect(ui->StereoCalib_button, SIGNAL(released()), this, SLOT(handleButton()));
     connect(ui->CalibErrorTesting_button, SIGNAL(released()), this, SLOT(handleButton()));
     connect(ui->Next_button, SIGNAL(released()), this, SLOT(next()));
+    connect(ui->Back_button, SIGNAL(released()), this, SLOT(back()));
     connect(ui->Exit_button, SIGNAL(released()), this, SLOT(close()));
 
 }
@@ -50,21 +34,21 @@ void CameraCalibrator::handleButton()
         ui->SingleCalib_button->setStyleSheet(" QPushButton{ background-color:blue }");
         ui->StereoCalib_button->setStyleSheet(" QPushButton{ background-color:white }");
         ui->CalibErrorTesting_button->setStyleSheet(" QPushButton{ background-color:white }");
-        m_buttonID = SelectSingleCameraWindow;
+        m_buttonID = SingleCameraWindow;
     }
     else if (button == ui->StereoCalib_button)
     {
         ui->SingleCalib_button->setStyleSheet(" QPushButton{ background-color:white }");
         ui->StereoCalib_button->setStyleSheet(" QPushButton{ background-color:blue }");
         ui->CalibErrorTesting_button->setStyleSheet(" QPushButton{ background-color:white }");
-        m_buttonID = SelectStereoCameraWindow;
+        m_buttonID = StereoCameraWindow;
     }
     else if (button == ui->CalibErrorTesting_button)
     {
         ui->SingleCalib_button->setStyleSheet(" QPushButton{ background-color:white }");
         ui->StereoCalib_button->setStyleSheet(" QPushButton{ background-color:white }");
         ui->CalibErrorTesting_button->setStyleSheet(" QPushButton{ background-color:blue }");
-        m_buttonID = ErrorCheckWindow;
+        m_buttonID = ErrorcheckWindow;
     }
     else
     {
@@ -76,11 +60,30 @@ void CameraCalibrator::handleButton()
 
 void CameraCalibrator::next()
 {
-    ui->stackedWidget->setCurrentIndex(1);
-
+    if (m_windowID == MainWindow)
+    {
+        ui->stackedWidget->setCurrentIndex(m_buttonID);
+        m_windowID = m_buttonID;
+        ui->Back_button->setEnabled(true);
+    }
+    else if (m_windowID == SingleCameraWindow)
+    {
+        std::cout<<"Not Implemented yet"<<m_buttonID<<std::endl;
+    }
+    else std::cout<<"Not Implemented "<<m_buttonID<<std::endl;
 }
 
 void CameraCalibrator::back()
 {
-
+    if (m_windowID == SingleCameraWindow || m_windowID == StereoCameraWindow || m_windowID == ErrorcheckWindow)
+    {
+        ui->stackedWidget->setCurrentIndex(MainWindow);
+        m_windowID = MainWindow;
+        m_buttonID = MainWindow;
+        ui->SingleCalib_button->setStyleSheet(" QPushButton{ background-color:white }");
+        ui->StereoCalib_button->setStyleSheet(" QPushButton{ background-color:white }");
+        ui->CalibErrorTesting_button->setStyleSheet(" QPushButton{ background-color:white }");
+        ui->Next_button->setDisabled(true);
+        ui->Back_button->setDisabled(true);
+    }
 }
