@@ -24,16 +24,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
+# OpenCV Configuration
+INCLUDEPATH += /usr/include/opencv4
+LIBS += -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_videoio -lopencv_calib3d -lopencv_imgcodecs
+
 SOURCES += \
         src/main.cpp \
-        src/cameracalibrator.cpp
+        src/cameracalibrator.cpp \
+        src/livecalibrationwindow.cpp
 
 HEADERS += \
-        inc/cameracalibrator.h
+        inc/cameracalibrator.h \
+        inc/livecalibrationwindow.h
 
 FORMS += \
         forms/cameracalibrator.ui \
-        forms/test_window.ui
+        forms/test_window.ui \
+        forms/livecalibrationwindow.ui
 
 INCLUDEPATH += src/ inc/
 

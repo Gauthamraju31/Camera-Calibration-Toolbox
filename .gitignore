@@ -1,2 +1,11 @@
 CameraCalibration.pro.user
 
+# Build artifacts
+*.o
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+Makefile
+.qmake.stash
+CameraCalibration
+

@@ -1,6 +1,6 @@
 #include "cameracalibrator.h"
 #include "ui_cameracalibrator.h"
-#include "ui_selectsinglecamera.h"
+#include "livecalibrationwindow.h"
 
 CameraCalibrator::CameraCalibrator(QWidget *parent) :
     QWidget(parent), m_buttonID(-1), m_windowID(MainWindow),
@@ -68,7 +68,11 @@ void CameraCalibrator::next()
     }
     else if (m_windowID == SingleCameraWindow)
     {
-        std::cout<<"Not Implemented yet"<<m_buttonID<<std::endl;
+        // Open the live calibration window
+        LiveCalibrationWindow *liveCalib = new LiveCalibrationWindow();
+        liveCalib->setWindowTitle("Single Camera Live Calibration");
+        liveCalib->show();
+        ui->statusLabel->setText("Live calibration window opened");
     }
     else std::cout<<"Not Implemented "<<m_buttonID<<std::endl;
 }
