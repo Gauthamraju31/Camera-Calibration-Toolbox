@@ -3,8 +3,10 @@
 #include "livecalibrationwindow.h"
 
 CameraCalibrator::CameraCalibrator(QWidget *parent) :
-    QWidget(parent), m_buttonID(-1), m_windowID(MainWindow),
-    ui(new Ui::CameraCalibrator)
+    QWidget(parent),
+    ui(new Ui::CameraCalibrator),
+    m_buttonID(-1),
+    m_windowID(MainWindow)
 {
     ui->setupUi(this);
     ui->SingleCalib_button->setStyleSheet(" QPushButton{ background-color:white }");
