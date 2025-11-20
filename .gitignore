@@ -8,4 +8,6 @@ qrc_*.cpp
 Makefile
 .qmake.stash
 CameraCalibration
+moc_predefs.h
+_codeql_detected_source_root
 
